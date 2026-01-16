@@ -1,0 +1,1278 @@
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0px;
+    padding: 0%;
+    background-color: #c7dbf7;
+    overflow-x: hidden;
+    scroll-behavior:smooth;
+}
+html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        scroll-behavior: smooth;
+}
+header {
+    background-color: #e1ecee;
+    padding: 1%;
+    box-shadow: 0 2px 4px rgba(10, 10, 10, 0.2);
+    box-sizing: border-box;
+    width: 102%;
+}
+
+header h1 {
+    margin: 0px;
+    margin-top: 10px;
+}
+
+header nav {
+    display: flex;
+    margin-left: auto;
+    font-size: 20px;
+}
+
+header nav li {
+    display: inline-block;
+    color: rgb(48, 48, 48);
+    margin-left: 50px;
+}
+
+header nav a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+header nav a:hover {
+    color: #6d93d0; /* Change color on hover */
+    transform: scale(1.05);
+    
+}
+header nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0px;
+    height: 2px;
+    background-color: #6d93d0;
+    transition: width 0.3s ease-in-out;
+}
+
+header nav a:hover::after {
+    width: 100%;
+    height: 3.5px;
+    border-radius: 10px;
+}
+
+header nav a:hover {
+    color: #6d93d0;
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+main {
+    padding: 40px 20px;
+}
+
+main h1 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+main p {
+    text-align: center;
+    color: #333;
+    font-size: 1em;
+    margin-bottom: 50px;
+}
+
+.upload-section {
+    width: 100%;
+    height: 400px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/static/brain-.png');
+    justify-content: center;
+    position: relative;
+}
+
+.upload-section::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.upload-section .file-input {
+    display: none;
+}
+
+.upload-section .drag-drop-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    border: grey solid;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 80px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.upload-section .drag-drop-area p {
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+.upload-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    max-width: 480px; 
+    height: auto; 
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: hidden; 
+}
+
+.upload-image-container img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit:contain; 
+}
+
+.upload-section .upload-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0px;
+
+}
+
+.upload-section .upload-button:hover {
+    background-color: #222;
+}
+
+.upload-image-container {
+    display: none;
+}
+
+.submit-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.submit-button:hover {
+    background-color: #222;
+}
+
+.submit-button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.report-box {
+    margin-left: 47px;
+    margin-right: 47px;
+    padding: 10px;
+    background-color: #e1ecee;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.report-message {
+    font-weight: bold;
+    padding: 15px;
+    font-size: 16px;
+    margin: 10px;
+    line-height: 1;
+    text-align: start;
+}
+
+h2 {
+    padding-top: 10px;
+    margin-left: 50px;
+}
+
+.additional {
+    padding: 20px;
+    font-size: 16px;
+    line-height: after;
+    text-align: start;
+    margin-bottom: 0px;
+}
+
+.positive {
+    color: crimson;
+}
+
+.negative {
+    color: green;
+}
+
+.faq {
+    margin-bottom: 1rem;
+    margin-left: 80px;
+}
+
+.faq h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5rem;
+}
+
+.faq p {
+    margin-top: 0;
+}
+
+.titlelogo {
+    border-radius: 30px;
+}
+
+.help {
+    margin-top: 100px;
+}
+
+.heading {
+    font-size: 3em;
+    margin-top: 10px;
+}
+
+.tel {
+    text-decoration: none;
+}
+
+.contact-us {
+    text-align: center;
+}
+
+.contact-us h2 {
+    margin-bottom: 20px;
+}
+#faq-section{
+    padding: 20px;
+}
+.team-member {
+    display:inline-block;
+    margin: 15px;
+    text-align: center;
+    border: none;
+}
+
+.team-member img {
+    width: 300px;
+    height: 400px;
+    padding: 5px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 50px;
+    transition:transform 1s ease-out;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.team-member img:hover{
+    width: 300px;
+    height: 400px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transform: scale(1.05);
+    transition:ease;
+    object-fit: cover;
+    border-radius: 50px;
+    transition: scale(0.5);
+    box-shadow: 5px 5px 10px gray;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+svg {
+    margin-right: 10px;
+}
+
+.team-member h3{
+    
+        margin-bottom: 1px;
+        font-size: 38px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+    
+}
+.team-member p {
+    margin-bottom: 1px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.contact-info {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    margin-bottom: 5px;
+}
+
+.contact-info a {
+    color: #333;
+    text-decoration: none;
+}
+
+.team {
+    margin: auto;
+    margin-left: 108px;
+    margin-right: 100px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    padding-left: 25px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+}
+
+.group {
+    position: relative;
+}
+
+.form .group label {
+    font-size: 14px;
+    color: rgb(99, 102, 102);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    transition: all .3s ease;
+}
+
+.form .group input,
+.form .group textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    outline: 0;
+    width: 100%;
+    background-color: transparent;
+}
+.group-container {
+    display: flex;
+    gap: 30px; 
+    margin-bottom: 0px;
+}
+.form .group input:placeholder-shown + label,
+.form .group textarea:placeholder-shown + label {
+    top: 10px;
+    background-color: transparent;
+}
+
+.form .group input:focus,
+.form .group textarea:focus {
+    border-color: #3366cc;
+}
+
+.form .group input:focus + label,
+.form .group textarea:focus + label {
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    color: #3366cc;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form .group textarea {
+    resize: none;
+    height: 100px;
+}
+
+.form button {
+    background-color: #3366cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 405px;
+}
+
+.form button:hover {
+    background-color: #27408b;
+}
+#home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    width: 100vw; 
+    background-color: #c7dbf7; 
+    margin-top: 10px;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+#home-page .background-box {
+    width: 80%;
+    height: 80%;
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-sizing: border-box; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden;
+    background-image: url("/static/1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: background-color 0.5s ease, transform 0.5s ease-in-out;
+}
+#home-page .background-box:hover{
+    width: 80%;
+    height: 80%;
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-sizing: border-box; 
+    text-align: center; 
+    display: flex;
+    transform: scale(1.02);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    overflow: hidden;
+    background-image: url("/static/1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 6px 6px 50px rgb(62, 146, 206);
+
+}
+
+#home-page .background-box h1 {
+    font-size: 10em; 
+    margin: 0;
+    font-family: 'Besley', serif;
+
+}
+
+#faq-section {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  section h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  section details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px; /* Adjusted padding */
+    position: relative;
+  }
+
+  section summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #007BFF;
+    padding: 10px; /* Adjusted padding */
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  /* Default triangle (downwards) */
+  section details:not([open]) summary::after {
+    content: "";
+    position: absolute;
+    right: 10px; /* Adjusted for increased padding */
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 8px solid transparent; /* Adjusted size */
+    border-right: 8px solid transparent; /* Adjusted size */
+    border-top: 8px solid #007BFF; /* Downward pointing triangle */
+  }
+  
+  /* Triangle pointing upwards when open */
+  section details[open] summary::after {
+    content: "";
+    position: absolute;
+    right: 10px; /* Adjusted for increased padding */
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 8px solid transparent; /* Adjusted size */
+    border-right: 8px solid transparent; /* Adjusted size */
+    border-bottom: 8px solid #007BFF; /* Upward pointing triangle */
+  }
+  
+  /* Hover effect to cover padding */
+  section summary:hover {
+    padding: 10px; /* Color changes when hovering */
+  }
+  
+  /* Content styling */
+  section p {
+    margin: 0;
+    padding: 10px; /* Adjusted padding */
+    color: #555;
+  }
+  
+  section ul {
+    list-style-type: disc;
+    padding-left: 20px; /* Adjusted padding-left if needed for lists */
+    color: #555;
+    margin: 10px 0; /* Adjusted margins */
+  }
+  
+  section a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  section a:hover {
+    text-decoration: underline;
+  }
+  
+
+#home-page .background-box p {
+    font-size: 20px; 
+    margin-top: 10px; 
+    color: #333;
+    font-family: 'Besley', serif; 
+}
+ .comment-box {
+    width: 100%;
+    height: 100%;
+    padding: 6%; 
+    border-radius: 10px; 
+    box-sizing: border-box; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.login-box {
+    width: 400px;
+    margin: 100px auto;
+}
+.login-box button{
+    margin-top: 5%;
+    width: 420px;
+}
+.input-with-button {
+    position: relative;
+}
+
+.input-with-button input {
+    padding-right: 80px; /* Add space for the button */
+}
+
+.input-with-button .send-button,
+.input-with-button .verify-button {
+    position: absolute;
+    top: 18.5px;
+    right: -15px;
+    transform: translateY(-50%);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3366cc;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1;
+    width: 65px;
+}
+/* General styling for the select element */
+.group select {
+    width: 406px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: rgb(99, 102, 102);
+    background-color: #fff;
+    margin-bottom: 20px;
+    appearance: none;
+
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  /* Add an arrow icon for better aesthetics */
+  .group {
+    position: relative;
+  }
+  
+  .group select::after {
+    content: '▼'; /* Downward arrow */
+    position: absolute;
+    margin-top: 100%;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #333;
+    pointer-events: none;
+  }
+  
+  /* Add a hover effect to change border color */
+  .group select:hover {
+    border-color: #888;
+  }
+  
+  /* Add a focus effect to enhance accessibility */
+  .group select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #fff;
+  }
+  
+  /* Optional: Styling for the label */
+  .group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  .login-submit{
+    margin-top: 20px;
+
+  }
+  .login-submit:disabled {
+    cursor:not-allowed;
+    background-color: #6c757d; 
+    color: #fff;
+    border: 1px solid #6c757d; 
+  }
+  .login-submit:disabled:hover {
+    cursor:not-allowed; 
+    background-color: #6c757d; 
+    color: #fff; 
+    border: 1px solid #6c757d; 
+  }
+  .hospitals-box {
+    margin: 60px 0;
+    margin-left: 47px;
+    margin-right: 47px;
+    width: 90.7%;
+    padding: 20px;
+    background-color: #e1ecee;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#hospitalsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#hospitalsTable th, #hospitalsTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+#hospitalsTable th {
+    background-color: #d4e4f0;
+    color: #333;
+}
+
+#hospitalsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#hospitalsTable tr:hover {
+    background-color: #dce4eb;
+}
+
+@media screen and (max-width: 600px) {
+    #hospitalsTable {
+        font-size: 14px;
+    }
+
+    #hospitalsTable th, #hospitalsTable td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #hospitalsTable thead {
+        display: none;
+    }
+
+    #hospitalsTable tr {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    #hospitalsTable td {
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    #hospitalsTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+}
+#pending-toggle{
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 0px 10px 0px 0px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+#sent-toggle {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#pending-toggle.active,
+#sent-toggle.active {
+    background-color: #d4e4f0;
+    color: #3366cc;
+    font-weight: bold;
+}
+
+.section {
+    padding: 10px;
+    margin-left: 47px;
+    max-width: 90.7%;
+    margin-right: 47px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+    margin-bottom: 20%;
+    border-top-left-radius: 0px;
+
+}
+.location-section{
+    padding: 10px;
+    margin-left: 47px;
+    max-width: 90.7%;
+    margin-right: 47px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+    margin-bottom: 20%;
+}
+.sectiontogg {
+    padding: 10px;
+    width: 265px;
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-left: 47px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.section h3 {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.section h3.active {
+    background-color: #0056b3;
+}
+
+.section h3:not(.active) {
+    background-color: #007bff;
+}
+
+
+#pending-replies,
+#sent-replies,
+#location-section {
+    width: 100%;
+}
+
+#pending-replies table,
+#sent-replies table,
+#location-section table  {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#pending-replies th,
+#sent-replies th,
+#pending-replies td,
+#sent-replies td,
+#location-section th,
+#location-section td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    width: auto;
+    text-align: start;
+    box-sizing: border-box;
+}
+
+#pending-replies th,
+#sent-replies th,
+#location-section th {
+    background-color: #d4e4f0;
+    color: #333;
+    box-sizing: border-box;
+}
+
+#pending-replies tr:nth-child(even),
+#sent-replies tr:nth-child(even),
+#location-section tr:nth-child(even)  {
+    background-color: #f9f9f9;
+}
+
+#pending-replies tr:hover,
+#sent-replies tr:hover {
+    background-color: #f1f1f1;
+}
+
+.reply-input {
+    width: 95%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.send-btn {
+    background-color: #3366cc;
+    color: white;
+    padding: 8px 12px;
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+.delete-btn{
+    background-color: crimson;
+    color: white;
+    padding: 8px 12px;
+    width: auto;
+    margin-left: 19px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+.delete-btn:hover{
+    background-color: rgb(169, 0, 34);
+}
+.edit-btn{
+    background-color: rgb(232, 176, 34);
+    color: white;
+    padding: 8px 12px;
+    width: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;  
+}
+.edit-btn:hover{
+    background-color:rgb(202, 154, 30);
+}
+
+.send-btn:hover {
+    background-color: #27408b;
+}
+.hidden {
+    display: none;
+}
+footer {
+    background-color: #e1ecee;
+    box-shadow: 0 -2px 4px rgba(10, 10, 10, 0.2);
+    margin-top: 150px;
+    margin-bottom: 0px;
+    text-align: center;
+    box-sizing: border-box;
+    width: 102%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 0px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: rgb(48, 48, 48);
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #6d93d0;
+}
+
+.subscribe-form {
+    display: flex;
+    align-items: center;
+}
+
+.subscribe-form input[type="email"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.subscribe-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3366cc;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-form button:hover {
+    background-color: #285bb5;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: rgb(48, 48, 48);
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #6d93d0;
+    transform: scale(1.1);
+}
+.mode-toggle {
+    position: fixed;
+    bottom: 80px; /* Position it above the footer */
+    right: 20px;
+    z-index: 1000;
+}
+
+#toggle-mode {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#toggle-mode:hover {
+    background-color: #0056b3;
+}
+header .container #menu-icon{
+    size: 5cap;
+}
+#threedots{
+    cursor: pointer;
+    margin-left: 0%;
+}
+.dotoptions{
+    font-size: 25px;
+    background-color: #e1ecee;
+    margin-left: 25.6px;
+    border-radius: 10px;
+    padding: 15px;
+    width: 220px;
+    list-style-type: none;
+    float:inherit;
+}
+#threedots li{
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 15px;
+
+    background-color: #6d93d0;
+}
+.adminheading{
+    margin-left: 47px;
+}
+#edit-location-form {
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    background: rgb(218, 184, 236);
+    border: 1px solid gray;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 500px;
+    gap: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1001;
+  }
+
+  .hidden{
+    display: none;
+  }
+  
+  
+  #edit-location-form input[type="text"],
+  #edit-location-form input[type="number"] {
+    width: auto;
+    padding: 10px;
+    margin-right: 10px;
+    gap: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background-color: #f1f8f9;
+    border-radius: 4px;
+  }
+  .boxinp{
+    margin-right: 20px;
+  }
+  
+  #add-hospital-button {
+    display: block;
+    width: 11.5%;
+    padding: 10px;
+    top: 150px;
+    margin: 10px 0;
+    background-color: #3366cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #add-hospital-button:hover {
+    background-color: #285bb5;
+  }
+  
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+
+  #edit-location-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #save-changes-button {
+    background-color: #4CAF50;
+    color: white;
+    flex: 1;
+    margin-right: 10px;
+    margin-left: 310px;
+  }
+  
+  #save-changes-button:hover {
+    background-color: #45a049;
+  }
+  
+  #close-edit-form {
+    background-color: crimson;
+    color: white;
+    flex: 1;
+  }
+  
+  #close-edit-form:hover {
+    background-color: #e53935;
+  }
+  .delete-hospital-button{
+    background-color: crimson;
+    margin-left: 20px;
+    color: white;
+  }
+  .addoredit{
+    font-size: x-large;
+    font-weight: bolder;
+    margin-left: 170px;
+  }
+  .search-container {
+    padding: 10px;
+    width: 405px;
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-left: 47px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  #search-input {
+    width: 285px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    align-items: baseline;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .search-container button{
+    width: 80px;
+    padding: 10px;
+    margin-left: 10px;
+    align-items: baseline;
+    background-color: #3366cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
