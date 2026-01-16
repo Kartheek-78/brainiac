@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brainiac</title>
+    <link rel="icon" href="/static/weblogo.png" />
+    <link rel="stylesheet" href="/static/web2.css" />
+    <link rel="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap">
+    <link rel="<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+       input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      textarea:-webkit-autofill,
+      textarea:-webkit-autofill:hover,
+      textarea:-webkit-autofill:focus,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+      }
+      /* Footer Styling */
+footer {
+    background-color: #e1ecee;
+    box-shadow: 0 -2px 4px rgba(10, 10, 10, 0.2);
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: rgb(48, 48, 48);
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #6d93d0;
+}
+
+.subscribe-form {
+    display: flex;
+    align-items: center;
+}
+
+.subscribe-form input[type="email"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.subscribe-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3366cc;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-form button:hover {
+    background-color: #285bb5;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: rgb(48, 48, 48);
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #6d93d0;
+    transform: scale(1.1);
+}
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="branding-logo">
+          <a href="#home-page">
+            <img
+              src="/static/Brainiac.png"
+              style="width: 150px; height: auto"
+              alt="Brainiac Logo"
+            />
+          </a>
+        </h1>
+        <nav class="branding-nav">
+          <ul>
+            <li><a href="#home-page"><i class="bi bi-house"></i> Home</i></a></li>
+            <li><a href="{{ url_for('start') }}">Get Started <i class="bi bi-box-arrow-in-up-right"></i></a></li>
+            <li><a href="#contact-section">Help <i class="bi bi-info-circle"></i></i></a></li>
+            <li><a href="#about-section">About Us <i class="bi bi-person-circle"></i> </a></li>
+            <li><a href="#faq-section">FAQ <i class="bi bi-question-circle"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="home-page">
+        <div class="background-box" data-aos="fade-up">
+            <h1>Brainiac</h1>
+            <p>
+                Empowering hope through early detection and advanced technology. Together, we can make a difference in the fight against brain tumor.
+            </p>
+        </div>
+    </section>
+    <section id="about-section">
+      <div class="team" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+        <p>OUR TEAM</p>
+        <h1 class="heading">Who We Are?</h1>
+        <p>
+          "We are a curated team of under-graduate students united by a single
+          goal;<br />
+          to create category-defining brands and digital experiences that make
+          an impact,<br />
+          shape culture and connect people."
+        </p>
+      </div>
+      <section class="contact-us" data-aos="fade-up">
+        <div class="team-member">
+          <img class="karthikimg" src="/static/kathi.jpg" alt="kartheek" />
+          <h3>Kartheek Reddy</h3>
+          <p>Role: Model Development, Back-End Development</p>
+          <p>
+            <i class="bi bi-telephone-outbound"></i> <a href="tel:+917842539259">+91 7842539259</a>
+          </p>
+          <ul class="contact-info">
+            <li>
+              <i class="bi bi-envelope-paper"> </i><a href="mailto:kartheekreddytatiparthi@gmail.com"
+                >kartheekreddytatiparthi@gmail.com</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="team-member">
+            <img class="vaimg" src="/static/varshitha.jpg" alt="varshitha">
+            <h3>Varshitha</h3>
+            <p>Role: Model Development, Database Management</p>
+
+            <p><i class="bi bi-telephone-outbound"></i> <a href="tel:+919491972901">+91 9491979201</a></p>
+            <ul class="contact-info">
+                <li><i class="bi bi-envelope-paper"></i> <a href="mailto:varshithakantipudi@gmail.com">varshithakantipudi@gmail.com</a></li>
+            </ul>
+        </div>
+        <div class="team-member">
+            <img class=" abimg" src="/static/profileAbhi.jpg" alt="abhi">
+            <h3>Abhinaya</h3>
+            <p>Role: Technical Writer, Tester</p>
+            <p><i class="bi bi-telephone-outbound"></i> <a href="tel:+919063555123">+91 9063555123</a></p>
+
+            <ul class="contact-info">
+                <li><i class="bi bi-envelope-paper"></i> <a href="mailto:abhinayajonnalagadda08@gmail.com">abhinayajonnalagadda08@gmail.com</a>
+                </li>
+            </ul>
+        </div>
+        <div class="team-member">
+            <img class="vijimg" src="/static/profile2.jpg" alt="vijay">
+            <h3>Vijay Varma</h3>
+            <p>Role: Front-End Development, Designing</p>
+
+            <p><i class="bi bi-telephone-outbound"></i> <a href="tel:+917032197462">+91 7032197462</a></p>
+            <ul class="contact-info">
+                <li><i class="bi bi-envelope-paper"></i> <a href="mailto:vijay.nadakuduti01@gmail.com">vijay.nadakuduti01@gmail.com</a></li>
+            </ul>
+        </div>
+        <section id="contact-section">
+        <div class="comment-box" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+          <h2 style="margin-right:50px;">Contact Form</h2>
+          <div class="card">
+              <span class="title">Leave a Comment</span>
+              <form action="/submit_comment" method="post" class="form">
+                  <div class="group">
+                      <input placeholder="‎" type="text" id="name" name="name" required="">
+                      <label for="name"><i class="bi bi-person-vcard"></i> Name</label>
+                  </div>
+                  <div class="group">
+                      <input placeholder="‎" type="email" id="email" name="email" required="">
+                      <label for="email"><i class="bi bi-envelope"></i> Email</label>
+                  </div>
+                  <div class="group">
+                      <textarea placeholder="‎" id="comment" name="comment" rows="5" required=""></textarea>
+                      <label for="comment">Comment <i class="bi bi-chat-left-dots-fill"></i></label>
+                  </div>
+                  <button type="submit" id="send-comment-button">Send Comment</button>
+              </form>
+          </div>
+      </div>
+    </section>
+
+      </section>
+    </section>
+    <section id="faq-section">
+      <div class="faq-container" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+        <h1>FAQ <i class="bi bi-question-circle"></i></h1>
+        
+        <details>
+          <summary>What is a brain tumor?</summary>
+          <p>A brain tumor is a group of abnormal cells that grow in the brain. These cells can be cancerous (malignant) or noncancerous (benign).</p>
+        </details>
+        
+        <details>
+          <summary>What are the symptoms of a brain tumor?</summary>
+          <p>Symptoms of a brain tumor can vary depending on the size, location, and type of tumor. Some common symptoms include:</p>
+          <ul>
+            <li>Headaches (especially new or worsening headaches)</li>
+            <li>Seizures</li>
+            <li>Nausea and vomiting</li>
+            <li>Vision problems</li>
+            <li>Difficulty speaking or understanding speech</li>
+            <li>Weakness or numbness in one side of the body</li>
+            <li>Balance problems</li>
+            <li>Difficulty thinking or concentrating</li>
+            <li>Personality changes</li>
+            <li>Hearing problems</li>
+          </ul>
+        </details>
+        
+        <details>
+          <summary>What should I do if the model suggests there might be a brain tumor?</summary>
+          <p>If the model suggests a possibility of a brain tumor, you should consult a doctor immediately. They can perform further tests and diagnose your condition accurately.</p>
+        </details>
+        
+        <details>
+          <summary>What if the model doesn't detect a brain tumor, but I'm experiencing symptoms?</summary>
+          <p>Even if the model doesn't detect a brain tumor, it's important to see a doctor if you're experiencing any concerning symptoms. There could be other explanations for your symptoms, and a doctor can help determine the cause.</p>
+        </details>
+        
+        <details>
+          <summary>Are there resources available to learn more about brain tumors?</summary>
+          <p>Yes! Here are some reputable organizations that provide information about brain tumors:</p>
+          <ul>
+            <li><a href="https://www.cancer.gov/types/brain/hp" target="_blank">National Cancer Institute</a></li>
+            <li><a href="https://www.abta.org/" target="_blank">American Brain Tumor Association</a></li>
+          </ul>
+        </details>
+        
+        <details>
+          <summary>What can I do to keep my brain healthy?</summary>
+          <p>While there is no guaranteed way to prevent brain tumors, maintaining a healthy lifestyle may contribute to overall brain health. This can include:</p>
+          <ul>
+            <li>Eating a balanced diet rich in fruits, vegetables, and whole grains.</li>
+            <li>Getting regular exercise.</li>
+            <li>Getting enough sleep.</li>
+            <li>Managing stress.</li>
+          </ul>
+        </details>
+        
+        <details>
+          <summary>What is a brain tumor detection model?</summary>
+          <p>This model is a computer program designed to analyze medical images, specifically MRI scans, to identify the presence of brain tumors.</p>
+        </details>
+        
+        <details>
+          <summary>How does the model work?</summary>
+          <p>The model is trained on a large dataset of labeled MRI scans. This training allows it to recognize patterns in the images that are indicative of brain tumors. When presented with a new MRI scan, the model analyzes it and outputs a probability of whether a tumor is present.</p>
+        </details>
+        
+        <details>
+          <summary>Can this model definitively diagnose a brain tumor?</summary>
+          <p>No. This model is designed to analyze brain scans for potential signs of tumors and should be used in conjunction with a doctor's evaluation. A definitive diagnosis can only be made by a qualified medical professional.</p>
+        </details>
+        
+        <details>
+          <summary>What types of brain tumors can the model detect?</summary>
+          <p>The specific capabilities of the model will depend on the data it was trained on. Our model can detect gliomas, meningiomas, and pituitary tumors.</p>
+        </details>
+        
+        <details>
+          <summary>What are the limitations of the model?</summary>
+          <p>The model is not perfect and may make mistakes. It is important to be aware of these limitations and to use the model in conjunction with other diagnostic tools.</p>
+        </details>
+        
+        <details>
+          <summary>What is the importance of early detection of brain tumors?</summary>
+          <p>Early detection of brain tumors is crucial because it can lead to earlier treatment, which may improve the chances of successful treatment and recovery. Early diagnosis can help manage symptoms more effectively and potentially improve overall outcomes.</p>
+        </details>
+        
+        <details>
+          <summary>How often should I get screened for brain tumors?</summary>
+          <p>Screening for brain tumors is typically based on individual risk factors and symptoms. If you have a family history of brain tumors or are experiencing symptoms, your doctor may recommend regular screenings. There is no standard screening frequency for the general population.</p>
+        </details>
+        
+        <details>
+          <summary>Are there any new treatments for brain tumors?</summary>
+          <p>Yes, there are ongoing advancements in brain tumor treatments, including targeted therapies, immunotherapies, and new surgical techniques. Treatments are continually evolving, and new options may become available as research progresses. Consult with a healthcare professional to explore the latest treatment options.</p>
+        </details>
+        
+        <details>
+          <summary>What role do clinical trials play in brain tumor treatment?</summary>
+          <p>Clinical trials play a significant role in developing and testing new treatments for brain tumors. They offer access to cutting-edge therapies and contribute to advancing medical knowledge. Participation in clinical trials can be an option for patients seeking additional treatment options.</p>
+        </details>
+        
+      </div>
+      <div class="help"data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"data-aos-duration="1500" data-aos-delay="200" >
+        <h3>Still need help? Send us a note!</h3>
+        <p>For any other questions, please write us at <a href="mailto:kartheekreddytatiparthi@gmail.com" class="tel">kartheekreddytatiparthi@gmail.com</a> || <a href="mailto:varshithakantipudi@gmail.com" class="tel">varshithakantipudi@gmail.com</a> or call us on <a href="tel:+917842539259" class="tel">+91 7842539259</a> || <a href="tel:+91 9491979201" class="tel">+91 9491979201</p>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-container">
+          <div class="footer-column">
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="#home-page">Home</a></li>
+                  <li><a href="#about-section">About Us</a></li>
+                  <li><a href="#faq-section">FAQ</a></li>
+                  <li><a href="#contact-section">Contact</a></li>
+                  <li><a href="{{ url_for('start') }}">Get Started</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-column">
+              <h4>Subscribe</h4>
+              <p>Enter your email to subscribe to our newsletter:</p>
+              <form action="/subscribe" method="post" class="subscribe-form">
+                  <input type="email" name="email" placeholder="Enter your email" required>
+                  <button type="submit">Subscribe</button>
+              </form>
+          </div>
+  
+          <div class="footer-column">
+              <h4>Follow Us</h4>
+              <div class="social-icons">
+                  <a href="https://github.com/yourprofile" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://wa.me/+917842539259" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-twitter-x"></i></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-threads"></i></a>
+              </div>
+          </div>
+      </div>
+      <p><i class="bi bi-c-circle"></i> 2024 Brainiac. All rights reserved.</p>
+  </footer>
+  <!-- <div class="mode-toggle">
+    <button id="toggle-mode"></button>
+</div> -->
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('.form');
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById('name').value.trim();
+          const email_comment = document.getElementById('email').value.trim();
+          const comment = document.getElementById('comment').value.trim();
+
+          if (!name || !email_comment || !comment) {
+              alert('Please fill out all fields.');
+              return;
+          }
+
+          submitButton.textContent = 'Sent';
+          submitButton.style.backgroundColor = 'green';
+          submitButton.style.color = 'white';
+          submitButton.disabled = true;
+          setTimeout(function(){
+            form.reset();
+            submitButton.style.color='white';
+            submitButton.style.backgroundColor='#3366cc';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Comment';
+          },4000);
+
+          const formData = new FormData();
+          formData.append('name', name);
+          formData.append('email_comment', email_comment);
+          formData.append('comment', comment);
+
+          fetch('/submit_comment', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (!data.success) {
+                  alert('Error submitting comment. Please try again.');
+                  submitButton.textContent = 'Send Comment';
+                  submitButton.style.backgroundColor = '';
+                  submitButton.style.color = '';
+                  submitButton.disabled = false;
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('Error submitting comment. Please try again.');
+              submitButton.textContent = 'Submit';
+              submitButton.style.backgroundColor = '';
+              submitButton.style.color = '';
+              submitButton.disabled = false;
+          });
+      });
+  });
+//   document.addEventListener('DOMContentLoaded', () => {
+//     const toggleButton = document.getElementById('toggle-mode');
+
+//     toggleButton.addEventListener('click', () => {
+//         document.body.classList.toggle('dark-mode');
+//         const isDarkMode = document.body.classList.contains('dark-mode');
+//         toggleButton.textContent = isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+//     });
+// });
+
+    </script>
+  </body>
+</html>

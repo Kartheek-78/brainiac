@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brainiac</title>
+    <link rel="icon" href="/static/weblogo.png" />
+    <link rel="stylesheet" href="/static/web2.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="branding-logo">
+          <a href="{{ url_for('index') }}">
+            <img
+              src="/static/Brainiac.png"
+              style="width: 150px; height: auto"
+            />
+          </a>
+        </h1>
+        <nav class="branding-nav">
+          <ul>
+            <li>
+              <a href="{{ url_for('upload') }}">
+                Back <i class="bi bi-box-arrow-left"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <h2>
+        <i class="bi bi-clipboard2-pulse"></i>
+        Brain Tumor Analysis Report
+      </h2>
+      <div class="report-box">
+        <p class="report-message" id="reportMessage1"></p>
+        <p class="report-message" id="reportMessage2"></p>
+        <p class="report-message" id="reportMessage3"></p>
+        <p class="additional" id="additionalInfo"></p>
+      </div>
+      <div class="hospitals-box">
+        <h3>Recommended Hospitals Near By Your Location</h3>
+        <table id="hospitalsTable">
+          <thead>
+            <tr>
+              <th><i class="bi bi-hospital"></i> Hospital Name</th>
+              <th><i class="bi bi-telephone-outbound"></i> Contact Number</th>
+            </tr>
+          </thead>
+          <tbody id="hospitalsBody">
+            <!-- Hospitals data will be inserted here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const prediction = "{{ prediction }}";
+        const city = "{{ city }}";
+
+        // Get the hospitals data via a fetch request
+        fetch(`/get_hospitals/${city}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const hospitals = data.hospitals || [];
+
+            let reportMessage1 = document.getElementById("reportMessage1");
+            let reportMessage2 = document.getElementById("reportMessage2");
+            let reportMessage3 = document.getElementById("reportMessage3");
+            let additionalInfo = document.getElementById("additionalInfo");
+            let hospitalsBody = document.getElementById("hospitalsBody");
+
+            // Debugging: Log the fetched data
+            console.log("Prediction:", prediction);
+            console.log("Hospitals:", hospitals);
+            console.log("Location:", city);
+
+            // Check the prediction and update the message accordingly
+            if (
+              prediction === "Glioma_Tumor" ||
+              prediction === "Meningioma_Tumor" ||
+              prediction === "Pituitary_Tumor"
+            ) {
+              reportMessage1.textContent = `After analyzing the uploaded image, our diagnostic system has detected the presence of a brain tumor. We strongly recommend that you seek consultation with a qualified specialist for a thorough examination and to discuss potential treatment options. Early intervention is crucial for effective management and care.`;
+              reportMessage2.textContent = `The result is positive (Brain Tumor Detected).`;
+              reportMessage3.textContent = `Type: ${prediction.replace(
+                "_",
+                " "
+              )}.`;
+              additionalInfo.textContent =
+                "If the analysis indicates a possibility of a brain tumor, we strongly urge you to consult a doctor immediately. A definitive diagnosis and proper treatment plan can only be determined by a qualified medical professional. We recommend visiting the National Cancer Institute (https://www.cancer.gov/) and the American Brain Tumor Association (https://www.abta.org/) for more information about brain tumors and treatment options. Additionally, you may find emotional support groups or counseling services helpful during this time.";
+              reportMessage1.classList.add("positive");
+              reportMessage2.classList.add("positive");
+              reportMessage3.classList.add("positive");
+            } else {
+              reportMessage1.textContent =
+                "The analysis did not detect the presence of a brain tumor.";
+              reportMessage2.textContent =
+                "The result is negative (Brain Tumor Not Detected).";
+              additionalInfo.textContent =
+                "However, if you are experiencing any headaches or other concerning symptoms, please consult a doctor for further evaluation. We are glad that you are not showing signs of a brain tumor.";
+              reportMessage1.classList.add("negative");
+              reportMessage2.classList.add("negative");
+              reportMessage3.classList.add("negative");
+            }
+
+            // Populate the hospitals table
+            if (hospitals.length > 0) {
+              hospitals.forEach((hospital) => {
+                const row = document.createElement("tr");
+                const nameCell = document.createElement("td");
+                const contactCell = document.createElement("td");
+
+                nameCell.textContent = hospital.name;
+                contactCell.textContent = hospital.phone;
+
+                row.appendChild(nameCell);
+                row.appendChild(contactCell);
+                hospitalsBody.appendChild(row);
+              });
+            } else {
+              const row = document.createElement("tr");
+              const cell = document.createElement("td");
+              cell.colSpan = 2;
+              cell.textContent =
+                "No hospitals available for the selected location.";
+              row.appendChild(cell);
+              hospitalsBody.appendChild(row);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching hospitals data:", error);
+          });
+      });
+    </script>
+  </body>
+</html>

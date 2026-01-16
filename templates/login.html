@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brainiac Login</title>
+    <link rel="icon" href="/static/weblogo.png" />
+    <link rel="stylesheet" href="/static/web2.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      textarea:-webkit-autofill,
+      textarea:-webkit-autofill:hover,
+      textarea:-webkit-autofill:focus,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+      }
+
+      /* === Fixed Dismissible Alert === */
+      #fixed-alert {
+        position: fixed;
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        padding: 14px 18px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: top 0.4s ease, opacity 0.4s ease;
+        opacity: 0;
+        z-index: 2000;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #fixed-alert.show {
+        top: 20px;
+        opacity: 1;
+        animation: slideDownBounce 0.6s ease-out;
+      }
+
+      #fixed-alert.error {
+        background-color: #b3202e;
+        color: #ffffff;
+        border: 1px solid #9a1b26;
+        animation: pulse 2s infinite;
+      }
+
+      #fixed-alert.success {
+        background-color: #198754;
+        color: #ffffff;
+        border: 1px solid #146c43;
+      }
+
+      #fixed-alert.info {
+        background-color: #0dcaf0;
+        color: #052c65;
+        border: 1px solid #0a58ca;
+      }
+
+      #alert-icon {
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
+      #alert-text {
+        flex-grow: 1;
+        text-align: left;
+      }
+
+      #close-alert {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        color: inherit;
+        margin-left: auto;
+        line-height: 1;
+      }
+
+      #close-alert:hover {
+        opacity: 0.7;
+      }
+
+      /* === Animations === */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.6);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+        }
+      }
+
+      @keyframes slideDownBounce {
+        0% {
+          top: -80px;
+          opacity: 0;
+        }
+        60% {
+          top: 25px;
+          opacity: 1;
+        }
+        80% {
+          top: 15px;
+        }
+        100% {
+          top: 20px;
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(-50%) translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-50%) translateX(-5px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(-50%) translateX(5px);
+        }
+      }
+
+      #fixed-alert.shake {
+        animation: shake 0.5s ease-in-out;
+      }
+
+      /* === Offline Styling for Form Card === */
+      .card {
+        transition: filter 0.4s ease, opacity 0.4s ease;
+        position: relative;
+      }
+
+      .card.offline {
+        filter: grayscale(100%) blur(1px);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      /* Offline overlay text */
+      .card.offline::after {
+        content: "OFFLINE MODE";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="fixed-alert">
+      <i id="alert-icon" class="bi"></i>
+      <span id="alert-text"></span>
+      <button id="close-alert">&times;</button>
+    </div>
+
+    <header>
+      <div class="container">
+        <h1 class="branding-logo">
+          <img
+            src="/static/Brainiac.png"
+            style="width: 150px; height: auto"
+            alt="Brainiac Logo"
+          />
+        </h1>
+        <nav class="branding-nav">
+          <ul>
+            <li>
+              <a href="{{ url_for('index') }}">
+                Back <i class="bi bi-box-arrow-left"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div
+      class="login-box"
+      data-aos="fade-up"
+      data-aos-duration="1500"
+      data-aos-delay="200"
+    ></div>
+
+    <div class="card" id="login-card">
+      <span class="title">Login to Brainiac</span>
+      <form class="form">
+        <div class="group-container">
+          <div class="group">
+            <input
+              type="text"
+              placeholder="‎"
+              id="first-name"
+              name="first-name"
+              required
+            />
+            <label for="first-name"
+              ><i class="bi bi-person-vcard"></i> First Name</label
+            >
+          </div>
+          <div class="group">
+            <input
+              type="text"
+              id="last-name"
+              placeholder="‎"
+              name="last-name"
+              required
+            />
+            <label for="last-name"
+              ><i class="bi bi-person-vcard-fill"></i> Last Name</label
+            >
+          </div>
+        </div>
+
+        <div class="group">
+          <select id="city" name="city" required>
+            <option value="" disabled selected>Select your city</option>
+          </select>
+        </div>
+
+        <div class="group input-with-button">
+          <input
+            type="email"
+            placeholder="‎"
+            id="email"
+            name="email"
+            required
+          />
+          <label for="email"><i class="bi bi-envelope-at"></i> Email</label>
+          <button type="button" id="send-button" class="send-button">
+            Send
+          </button>
+        </div>
+
+        <div class="group input-with-button">
+          <input
+            type="text"
+            pattern="\d{6}"
+            maxlength="6"
+            placeholder="‎"
+            id="otp"
+            name="otp"
+            required
+          />
+          <label for="otp"><i class="bi bi-key"></i> OTP</label>
+          <button type="button" id="verify-button" class="verify-button">
+            Verify
+          </button>
+        </div>
+
+        <button class="login-submit" id="submit-button" type="submit" disabled>
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Brainiac. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/waveform.js"
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        AOS.init({ duration: 1000 });
+
+        const citySelect = document.getElementById("city");
+        const sendButton = document.getElementById("send-button");
+        const verifyButton = document.getElementById("verify-button");
+        const submitButton = document.getElementById("submit-button");
+        const alertBox = document.getElementById("fixed-alert");
+        const alertText = document.getElementById("alert-text");
+        const alertIcon = document.getElementById("alert-icon");
+        const closeAlert = document.getElementById("close-alert");
+        const loginCard = document.getElementById("login-card");
+
+        const sendOtpUrl = "{{ url_for('send_otp') }}";
+        const verifyOtpUrl = "{{ url_for('verify_otp') }}";
+        const submitUrl = "{{ url_for('submit_login') }}";
+
+        // === ALERT HANDLER ===
+        function showFixedAlert(
+          message,
+          type = "error",
+          duration = 5000,
+          iconClass = ""
+        ) {
+          alertText.textContent = message;
+          alertBox.className = "";
+          alertBox.classList.add("show", type);
+
+          // Icon logic
+          alertIcon.className = iconClass
+            ? `bi ${iconClass}`
+            : type === "error"
+            ? "bi bi-exclamation-triangle-fill"
+            : type === "success"
+            ? "bi bi-check-circle-fill"
+            : type === "info"
+            ? "bi bi-info-circle-fill"
+            : "bi";
+
+          // Shake if error
+          if (type === "error") {
+            alertBox.classList.add("shake");
+            setTimeout(() => alertBox.classList.remove("shake"), 600);
+          }
+
+          const hide = () => {
+            alertBox.classList.remove("show", "pulse", "shake");
+            alertIcon.className = "bi";
+          };
+
+          closeAlert.onclick = hide;
+          clearTimeout(alertBox.hideTimeout);
+          if (duration > 0) alertBox.hideTimeout = setTimeout(hide, duration);
+        }
+
+        // === NETWORK STATUS HANDLING ===
+        function showOfflineAlert() {
+          closeAlert.style.display = "none";
+          showFixedAlert(
+            "You are offline. Please check your internet connection.",
+            "error",
+            0,
+            "bi-wifi-off"
+          );
+          loginCard.classList.add("offline");
+        }
+
+        function hideOfflineAlert() {
+          closeAlert.style.display = "block";
+          loginCard.classList.remove("offline");
+          if (alertText.textContent.includes("offline")) {
+            showFixedAlert(
+              "Back online. Connection restored.",
+              "success",
+              4000,
+              "bi-wifi"
+            );
+          }
+        }
+
+        setTimeout(() => {
+          if (!navigator.onLine) showOfflineAlert();
+        }, 500);
+
+        window.addEventListener("offline", showOfflineAlert);
+        window.addEventListener("online", hideOfflineAlert);
+
+        // === FETCH CITIES ===
+        fetch("/get_cities")
+          .then((response) => response.json())
+          .then((data) => {
+            data.cities.forEach((city) => {
+              const option = document.createElement("option");
+              option.value = city.value;
+              option.textContent = city.text;
+              citySelect.appendChild(option);
+            });
+          })
+          .catch(() =>
+            showFixedAlert(
+              "Unable to load cities. Please refresh the page.",
+              "error"
+            )
+          );
+
+        // === SEND OTP ===
+        sendButton.addEventListener("click", function () {
+          const email = document.getElementById("email").value.trim();
+          const firstName = document.getElementById("first-name").value.trim();
+          const lastName = document.getElementById("last-name").value.trim();
+
+          if (!email)
+            return showFixedAlert(
+              "Please enter your email before sending the OTP.",
+              "error"
+            );
+          if (!firstName || !lastName)
+            return showFixedAlert(
+              "Please enter your first and last name.",
+              "error"
+            );
+
+          sendButton.textContent = "";
+          sendButton.style.backgroundColor = "orange";
+          sendButton.innerHTML = `<l-waveform size="15" stroke="2" speed="1" color="black"></l-waveform>`;
+          sendButton.disabled = true;
+
+          fetch(sendOtpUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, firstName, lastName }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                document.getElementById("otp").style.display = "block";
+                sendButton.textContent = "Sent";
+                sendButton.style.backgroundColor = "green";
+                verifyButton.style.display = "block";
+                showFixedAlert("OTP sent successfully.", "success");
+              } else {
+                showFixedAlert(
+                  data.message || "Failed to send OTP. Please try again.",
+                  "error"
+                );
+                sendButton.textContent = "Send";
+                sendButton.style.backgroundColor = "";
+                sendButton.disabled = false;
+              }
+            })
+            .catch(() => {
+              showFixedAlert(
+                "You appear to be offline. Please check your internet connection.",
+                "error",
+                5000,
+                "bi-wifi-off"
+              );
+              sendButton.textContent = "Send";
+              sendButton.style.backgroundColor = "";
+              sendButton.disabled = false;
+            });
+        });
+
+        // === VERIFY OTP ===
+        verifyButton.addEventListener("click", function () {
+          const otp = document.getElementById("otp").value.trim();
+          const email = document.getElementById("email").value.trim();
+
+          if (!email)
+            return showFixedAlert(
+              "Please enter your email before verifying OTP.",
+              "error"
+            );
+          if (!otp)
+            return showFixedAlert(
+              "Please enter the OTP sent to your email.",
+              "error"
+            );
+
+          fetch(verifyOtpUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, otp }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                verifyButton.textContent = "Verified";
+                verifyButton.style.backgroundColor = "green";
+                verifyButton.disabled = true;
+                submitButton.disabled = false;
+                showFixedAlert("OTP verified successfully.", "success");
+              } else {
+                showFixedAlert("Invalid OTP. Please try again.", "error");
+              }
+            })
+            .catch(() =>
+              showFixedAlert("Error verifying OTP. Please retry.", "error")
+            );
+        });
+
+        // === FINAL SUBMIT ===
+        submitButton.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          const firstName = document.getElementById("first-name").value.trim();
+          const lastName = document.getElementById("last-name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const city = document.getElementById("city").value;
+
+          if (!firstName || !lastName || !email || !city)
+            return showFixedAlert(
+              "Please fill in all required fields before submitting.",
+              "error"
+            );
+
+          if (
+            firstName.toLowerCase() === "super" &&
+            lastName.toLowerCase() === "admin" &&
+            email === "brainiac.team.web@gmail.com"
+          ) {
+            window.location.href = "{{ url_for('admin') }}";
+            return;
+          }
+
+          fetch(submitUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              city,
+              first_name: firstName,
+              last_name: lastName,
+              email,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.redirect_url) {
+                window.location.href = data.redirect_url;
+              } else {
+                showFixedAlert(
+                  data.error || "Something went wrong. Please try again.",
+                  "error"
+                );
+              }
+            })
+            .catch(() =>
+              showFixedAlert(
+                "You appear to be offline. Please check your internet connection.",
+                "error",
+                5000,
+                "bi-wifi-off"
+              )
+            );
+        });
+      });
+    </script>
+  </body>
+</html>

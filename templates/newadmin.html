@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Page</title>
+    <link rel="icon" href="/static/weblogo.png" />
+    <link rel="stylesheet" href="/static/web2.css" />
+    <link
+      rel="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+    />
+    <link
+      rel="<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        transition: margin-left 0.3s;
+      }
+      header,
+      footer {
+        background: #e1ecee;
+        padding: 1%;
+        width: 102%;
+        font-family: "Poppins", sans-serif;
+        transition: width 0.3s;
+        z-index: -1;
+      }
+
+      #sidebar {
+        position: fixed;
+        top: 0;
+        border-right: #292929;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #d8e3e4;
+        color: black;
+        transition: left 0.3s;
+        z-index: 1000;
+        position: absolute;
+        overflow-y: auto;
+      }
+      #sidebar .para {
+        margin-top: 90px;
+      }
+
+      #sidebar.active {
+        left: 0;
+      }
+
+      .menu-icon {
+        position: absolute;
+        top: 30px;
+        width: 200px;
+        left: 10px;
+        font-size: 24px;
+        width: 35px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      #sidebar a {
+        color: black;
+        text-decoration: none;
+        display: block;
+        padding: 15px;
+      }
+      .section .active {
+        margin-bottom: 20%;
+      }
+
+      #sidebar a:hover {
+        background: skyblue;
+      }
+
+      .comments-section,
+      .location-page {
+        padding: 20px;
+        transition: margin-left 0.3s;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .active {
+        font-weight: bold;
+      }
+
+      .sent-btn {
+        background-color: green;
+        padding: 8px 12px;
+        color: white;
+        border: none;
+        width: 100px;
+        border-radius: 4px;
+        cursor: not-allowed;
+      }
+
+      .myaction {
+        width: 100px;
+      }
+
+      .sentreplies {
+        width: 305px;
+      }
+      .menu-icon .line {
+        background-color: black;
+        height: 4px;
+        margin-top: 4px;
+        cursor: pointer;
+        border-radius: 705px;
+        width: 25px;
+        display: block;
+      }
+      .branding-logo {
+        margin-left: 20px;
+      }
+      /* Styles for the hospital names and phone number boxes */
+      .hospital-box,
+      .phone-box {
+        background-color: #f1f1f1;
+        width: 100%;
+        padding: 5px; /* Padding around the text */
+        margin-bottom: 5px; /* Space between the boxes */
+        border-radius: 5px; /* Rounded corners */
+        border: 1px solid #ccc; /* Light border */
+      }
+
+      /* Optionally, you can add some hover effects for better UX */
+      .hospital-box:hover,
+      .phone-box:hover {
+        background-color: #e0e0e0; /* Darker grey on hover */
+      }
+      /* Hospital Names and Phone Numbers Separation */
+      .hospital-name,
+      .hospital-phone {
+        padding: 10px;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .hospital-name:last-child,
+      .hospital-phone:last-child {
+        border-bottom: none;
+      }
+      .alertbox {
+        background-color: rgb(54, 174, 54);
+        width: 510px;
+        margin-left: 35%;
+        padding-left: 20px;
+        padding-right: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border-radius: 5px;
+        border: 1px solid grey;
+        position: fixed;
+        margin-top: 10px;
+      }
+      .alertmsg {
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="branding-logo">
+          <img
+            src="/static/Brainiac.png"
+            style="width: 150px; height: auto"
+            alt="Brainiac Logo"
+          />
+        </h1>
+        <nav class="branding-nav">
+          <ul>
+            <li>
+              <a href="{{ url_for('index') }}">
+                Back <i class="bi bi-box-arrow-left"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="alertbox hidden" id="alertbox">
+      <p class="alertmsg" id="alertmsg">
+        Hospitals Data Updated Successfully, Please Refresh To See Updated Data
+      </p>
+    </div>
+    <div class="menu-icon" id="menu-icon">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div id="sidebar">
+      <div class="para">
+        <a href="#manage-comments" id="manage-comments-link">Manage Comments</a>
+        <a href="#manage-locations" id="manage-locations-link"
+          >Manage Locations</a
+        >
+      </div>
+    </div>
+
+    <div class="comments-section" id="manage-comments">
+      <h1 class="adminheading">
+        Manage Comments <i class="bi bi-chat-left-text"></i>
+      </h1>
+
+      <div class="sectiontogg">
+        <h3 id="pending-toggle" class="active">
+          Pending <i class="bi bi-question-square"></i>
+        </h3>
+        <h3 id="sent-toggle">Sent <i class="bi bi-check-square"></i></h3>
+      </div>
+
+      <div id="pending-replies" class="section">
+        <table>
+          <thead>
+            <tr>
+              <th><i class="bi bi-person-vcard"></i> Name</th>
+              <th><i class="bi bi-envelope"></i> Email</th>
+              <th>Comment <i class="bi bi-chat-right-text"></i></th>
+              <th>Reply <i class="bi bi-reply-fill"></i></th>
+              <th class="myaction">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for comment in pending_comments %}
+            <tr data-comment-id="{{ comment._id }}">
+              <td>{{ comment.name }}</td>
+              <td>{{ comment.email_comment }}</td>
+              <td>{{ comment.comment }}</td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Enter a Reply"
+                  name="reply"
+                  class="reply-input"
+                  required
+                />
+              </td>
+              <td>
+                <button
+                  id="send-btn-{{ comment._id }}"
+                  class="send-btn"
+                  data-comment-id="{{ comment._id }}"
+                >
+                  Send Reply
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div id="sent-replies" class="section hidden">
+        <table>
+          <thead>
+            <tr>
+              <th><i class="bi bi-person-vcard"></i> Name</th>
+              <th><i class="bi bi-envelope"></i> Email</th>
+              <th>Comment <i class="bi bi-chat-right-text"></i></th>
+              <th>Reply <i class="bi bi-reply-fill"></i></th>
+              <th class="myaction">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for comment in sent_comments %}
+            <tr>
+              <td>{{ comment.name }}</td>
+              <td>{{ comment.email_comment }}</td>
+              <td>{{ comment.comment }}</td>
+              <td>{{ comment.reply }}</td>
+              <td>
+                <button
+                  id="delete-btn-{{ comment._id }}"
+                  class="delete-btn"
+                  data-comment-id="{{ comment._id }}"
+                >
+                  Delete <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="location-page hidden" id="manage-locations">
+      <h1 class="adminheading">Manage Locations <i class="bi bi-map"></i></h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search" />
+        <button id="add-btn">Add <i class="bi bi-plus-lg"></i></button>
+      </div>
+      <div
+        class="location-section"
+        style="border-top-left-radius: 0px"
+        id="location-section"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th><i class="bi bi-person-vcard"></i> Location</th>
+              <th><i class="bi bi-hospital"></i> Hospital Name</th>
+              <th>Contact Number <i class="bi bi-phone"></i></th>
+              <th class="myaction">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for location in locations %}
+            <tr data-location-id="{{ location._id }}">
+              <!-- Location Name Column -->
+              <td class="locname">{{ location.city }}</td>
+
+              <!-- Hospital Names Column -->
+              <td>
+                {% for hospital in location.hospitals %}
+                <div class="hospital-name">{{ hospital.name }}</div>
+                {% endfor %}
+              </td>
+
+              <!-- Phone Numbers Column -->
+              <td>
+                {% for hospital in location.hospitals %}
+                <div class="hospital-phone">{{ hospital.phone }}</div>
+                {% endfor %}
+              </td>
+
+              <!-- Edit and Delete Buttons Column -->
+              <td>
+                <button
+                  id="edit-btn-{{ location._id }}"
+                  class="edit-btn"
+                  data-location-id="{{ location._id }}"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="edit-location-form" class="floating-form hidden">
+      <form id="edit-form">
+        <label for="location-name" class="addoredit">Add/Edit Details</label>
+        <input
+          type="text"
+          id="location-name"
+          placeholder="Location Name"
+          name="location_name"
+          required
+        />
+        <label id="input-loc"></label>
+
+        <div id="hospital-container">
+          <!-- Hospital name and contact number fields will be dynamically added here -->
+        </div>
+
+        <button type="button" id="add-hospital-button">Add</button>
+
+        <input type="hidden" id="location-id" name="location_id" />
+        <button type="submit" id="save-changes-button">Save Changes</button>
+        <button type="button" id="close-edit-form">Cancel</button>
+      </form>
+    </div>
+
+    <!-- <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Brainiac. All rights reserved.</p>
+      </div>
+    </footer> -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const menuIcon = document.getElementById("menu-icon");
+        const manageCommentsSection =
+          document.getElementById("manage-comments");
+        const manageLocationsSection =
+          document.getElementById("manage-locations");
+        const editForm = document.getElementById("edit-location-form");
+        const closeEditForm = document.getElementById("close-edit-form");
+        const saveChangesButton = document.getElementById(
+          "save-changes-button"
+        );
+        const addHospitalButton = document.getElementById(
+          "add-hospital-button"
+        );
+        const hospitalContainer = document.getElementById("hospital-container");
+        const pendingToggle = document.getElementById("pending-toggle");
+        const sentToggle = document.getElementById("sent-toggle");
+        const pendingSection = document.getElementById("pending-replies");
+        const sentSection = document.getElementById("sent-replies");
+        const alertbox = document.getElementById("alertbox");
+
+        // Sidebar toggle
+        menuIcon.addEventListener("click", function () {
+          sidebar.classList.toggle("active");
+          document.body.style.marginLeft = sidebar.classList.contains("active")
+            ? "240px"
+            : "0%";
+          document.querySelector("header").style.width =
+            sidebar.classList.contains("active") ? "calc(100%)" : "100%";
+          document.querySelector("footer").style.width =
+            sidebar.classList.contains("active") ? "calc(100%)" : "100%";
+        });
+
+        // Manage Comments Section toggle
+        document
+          .getElementById("manage-comments-link")
+          .addEventListener("click", function () {
+            manageCommentsSection.classList.remove("hidden");
+            manageLocationsSection.classList.add("hidden");
+            sidebar.classList.remove("active");
+            document.body.style.marginLeft = "0%";
+            document.querySelector("header").style.width = "100%";
+            document.querySelector("footer").style.width = "100%";
+          });
+
+        // Manage Locations Section toggle
+        document
+          .getElementById("manage-locations-link")
+          .addEventListener("click", function () {
+            manageCommentsSection.classList.add("hidden");
+            manageLocationsSection.classList.remove("hidden");
+            sidebar.classList.remove("active");
+            document.body.style.marginLeft = "0%";
+            document.querySelector("header").style.width = "100%";
+            document.querySelector("footer").style.width = "100%";
+          });
+
+        // Handle Edit Button Click
+        document.querySelectorAll(".edit-btn").forEach(function (button) {
+          button.addEventListener("click", function () {
+            const locationID = button.getAttribute("data-location-id");
+
+            fetch(`/edit_hospitals/${encodeURIComponent(locationID)}`)
+              .then(function (response) {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+              })
+              .then(function (data) {
+                if (data.error) {
+                  console.error("Error fetching data:", data.error);
+                  return;
+                }
+
+                // Populate form fields with fetched data
+                document.getElementById("location-name").value =
+                  data.location_name;
+                hospitalContainer.innerHTML = "";
+
+                (data.hospitals || []).forEach(function (hospital) {
+                  const hospitalDiv = document.createElement("div");
+                  hospitalDiv.classList.add("hospital-entry");
+
+                  const hospitalNameInput = document.createElement("input");
+                  hospitalNameInput.type = "text";
+                  hospitalNameInput.name = "hospital_name[]";
+                  hospitalNameInput.value = hospital.name || "";
+                  hospitalNameInput.classList.add("boxinp");
+                  hospitalNameInput.required = true;
+
+                  const contactNumberInput = document.createElement("input");
+                  contactNumberInput.type = "text";
+                  contactNumberInput.name = "contact_number[]";
+                  contactNumberInput.value = hospital.phone || "";
+                  contactNumberInput.classList.add("boxinp");
+                  contactNumberInput.required = true;
+
+                  const deleteButton = document.createElement("button");
+                  deleteButton.type = "button";
+                  deleteButton.classList.add("delete-hospital-button");
+                  deleteButton.innerText = "Delete";
+
+                  hospitalDiv.appendChild(hospitalNameInput);
+                  hospitalDiv.appendChild(contactNumberInput);
+                  hospitalDiv.appendChild(deleteButton);
+                  hospitalContainer.appendChild(hospitalDiv);
+
+                  deleteButton.addEventListener("click", function () {
+                    if (confirm("Are you sure you want to delete this data?")) {
+                      hospitalDiv.remove();
+                    }
+                  });
+                });
+
+                // Show the edit form
+                editForm.classList.remove("hidden");
+              })
+              .catch(function (error) {
+                console.error("Error fetching hospitals:", error);
+              });
+          });
+        });
+
+        // Handle Add Hospital Button Click
+        addHospitalButton.addEventListener("click", function () {
+          const hospitalDiv = document.createElement("div");
+          hospitalDiv.classList.add("hospital-entry");
+
+          const hospitalNameInput = document.createElement("input");
+          hospitalNameInput.type = "text";
+          hospitalNameInput.name = "hospital_name[]";
+          hospitalNameInput.placeholder = "Hospital Name";
+          hospitalNameInput.required = true;
+
+          const contactNumberInput = document.createElement("input");
+          contactNumberInput.type = "text";
+          contactNumberInput.name = "contact_number[]";
+          contactNumberInput.placeholder = "Contact Number";
+          contactNumberInput.required = true;
+
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.classList.add("delete-hospital-button");
+          deleteButton.innerText = "Delete";
+
+          hospitalDiv.appendChild(hospitalNameInput);
+          hospitalDiv.appendChild(contactNumberInput);
+          hospitalDiv.appendChild(deleteButton);
+          hospitalContainer.appendChild(hospitalDiv);
+
+          // Handle Delete Hospital Button Click
+          deleteButton.addEventListener("click", function () {
+            hospitalDiv.remove();
+          });
+        });
+
+        // Toggle Pending and Sent Replies Sections
+        pendingToggle.addEventListener("click", function () {
+          pendingSection.classList.remove("hidden");
+          sentSection.classList.add("hidden");
+          pendingToggle.classList.add("active");
+          sentToggle.classList.remove("active");
+        });
+
+        sentToggle.addEventListener("click", function () {
+          sentSection.classList.remove("hidden");
+          pendingSection.classList.add("hidden");
+          sentToggle.classList.add("active");
+          pendingToggle.classList.remove("active");
+        });
+
+        // Handle Send Reply Button Click in Pending Replies
+        document.querySelectorAll(".send-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            const commentId = button.getAttribute("data-comment-id");
+            const row = button.closest("tr");
+            const replyInput = row.querySelector('input[name="reply"]');
+            const reply = replyInput.value.trim();
+
+            if (!reply) {
+              alert("Please enter a reply before sending.");
+              return;
+            }
+
+            button.classList.add("sent-btn");
+            button.textContent = "Sent";
+            button.disabled = true;
+            const formData = new FormData();
+            formData.append("comment_id", commentId);
+            formData.append("reply", reply);
+
+            fetch("/send_reply", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  const pendingTable = row.closest("tbody");
+                  pendingTable.removeChild(row);
+
+                  const sentTable = document.querySelector(
+                    "#sent-replies tbody"
+                  );
+                  const newRow = document.createElement("tr");
+                  newRow.innerHTML = `
+                        <td>${
+                          row.querySelector("td:nth-child(1)").innerText
+                        }</td>
+                        <td>${
+                          row.querySelector("td:nth-child(2)").innerText
+                        }</td>
+                        <td>${
+                          row.querySelector("td:nth-child(3)").innerText
+                        }</td>
+                        <td>${reply}</td>
+                        <td>
+                          <button
+                            id="delete-btn-${commentId}"
+                            class="delete-btn"
+                            data-comment-id="${commentId}"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                    `;
+                  sentTable.appendChild(newRow);
+                } else {
+                  alert("Error sending reply. Please try again.");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error sending reply. Please try again.");
+              });
+          });
+        });
+        document.querySelectorAll(".delete-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            const commentId = button.getAttribute("data-comment-id");
+            const row = button.closest("tr");
+
+            if (confirm("Are you sure you want to delete this reply?")) {
+              button.textContent = "Deleted";
+              button.disabled = true;
+              fetch(`/delete_comment/${commentId}`, {
+                method: "DELETE",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.success) {
+                    const sentTable = row.closest("tbody");
+                    sentTable.removeChild(row);
+                  } else {
+                    alert("Error deleting reply. Please try again.");
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                  alert("Error deleting reply. Please try again.");
+                });
+            }
+          });
+        });
+        const addBtn = document.getElementById("add-btn");
+
+        addBtn.addEventListener("click", function () {
+          editForm.classList.remove("hidden");
+        });
+
+        // Handle Cancel Button Click
+        closeEditForm.addEventListener("click", function () {
+          editForm.classList.add("hidden");
+          document.getElementById("edit-form").reset(); // Reset form fields to default values
+        });
+
+        // Handle Save Changes Button Click
+        saveChangesButton.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+
+          const formData = new FormData(document.getElementById("edit-form"));
+
+          // Convert FormData to JSON
+          const data = {};
+          formData.forEach((value, key) => {
+            if (data[key]) {
+              // If the key already exists and is not an array, convert it to an array
+              if (!Array.isArray(data[key])) {
+                data[key] = [data[key]];
+              }
+              // Add new value to the array
+              data[key].push(value);
+            } else {
+              // Initialize the key with the value
+              data[key] = value;
+            }
+          });
+
+          // Assuming locationId is available in your context
+          const inpcity = document.getElementById("location-name").value;
+
+          fetch(`/update_hospitals/${inpcity}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data, inpcity),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                editForm.classList.add("hidden");
+                alertbox.classList.remove("hidden");
+              } else {
+                alert(`Failed to update hospitals: ${data.error}`);
+              }
+            })
+            .catch((error) => {
+              console.error("Error updating hospitals:", error);
+              alert(
+                "An error occurred while updating hospitals. Please try again."
+              );
+            });
+        });
+      });
+      document
+        .getElementById("search-input")
+        .addEventListener("keyup", function () {
+          const searchTerm = this.value.toLowerCase();
+          document
+            .querySelectorAll("#location-section tbody tr")
+            .forEach((row) => {
+              // Collect all relevant text from the row
+              const location = row.querySelector(".locname")
+                ? row.querySelector(".locname").textContent.toLowerCase()
+                : "";
+              const hospitalNames = Array.from(
+                row.querySelectorAll(".hospital-name")
+              ).map((el) => el.textContent.toLowerCase());
+              const phoneNumbers = Array.from(
+                row.querySelectorAll(".hospital-phone")
+              ).map((el) => el.textContent.toLowerCase());
+
+              // Check if the search term is present in any of the relevant fields
+              const isMatch =
+                location.includes(searchTerm) ||
+                hospitalNames.some((name) => name.includes(searchTerm)) ||
+                phoneNumbers.some((phone) => phone.includes(searchTerm));
+
+              // Display or hide the row based on the match
+              row.style.display = isMatch ? "" : "none";
+            });
+        });
+    </script>
+  </body>
+</html>

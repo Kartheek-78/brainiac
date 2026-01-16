@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Denied</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      /* A subtle reset for consistency */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        /* A cleaner, more professional light gray background */
+        background-color: #f8f9fa;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .error-box {
+        background: #ffffff;
+        border-radius: 16px;
+        /* A softer, more modern shadow for depth */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        padding: 40px;
+        max-width: 420px;
+        width: 100%;
+        text-align: center;
+        /* Updated animation name */
+        animation: fadeInUp 0.7s ease-out;
+        border: 1px solid #e9ecef; /* Subtle border */
+      }
+
+      .error-box i {
+        /* Using a "shield lock" icon, more specific to authorization */
+        font-size: 60px;
+        /* A more standard, slightly deeper red for errors */
+        color: #dc3545;
+        margin-bottom: 25px;
+      }
+
+      .error-box h1 {
+        font-size: 28px;
+        color: #212529;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+
+      .error-box p {
+        color: #6c757d; /* A softer gray for body text */
+        margin-bottom: 30px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .error-box a {
+        display: inline-block; /* Ensures padding and margins work correctly */
+        text-decoration: none;
+        background: #007bff; /* A standard, vibrant "primary" blue */
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease,
+          box-shadow 0.3s ease;
+        font-weight: 600;
+        font-size: 16px;
+        /* Subtle shadow on the button itself for a "lifted" feel */
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+      }
+
+      .error-box a:hover {
+        background: #0056b3; /* A darker shade for hover */
+        /* Lifts the button slightly on hover */
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+      }
+
+      /* Updated animation to fade and slide in from the bottom */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-box">
+      <i class="bi bi-shield-lock-fill"></i>
+      <h1>Access Denied</h1>
+      <p>
+        Sorry, you do not have permission to view this page. Please log in to
+        continue.
+      </p>
+      <a href="/start">Go to Login Page</a>
+    </div>
+  </body>
+</html>
